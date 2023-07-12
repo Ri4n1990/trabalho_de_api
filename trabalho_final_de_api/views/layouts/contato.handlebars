@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/{{style}}">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Área do cliente</title>
+</head>
+<body>
+    {{{body}}}
+</body>
+
+<script>
+   function agendar() {
+  var p = document.getElementById('conf');
+  const nome = document.getElementById('nome').textContent;
+  const email = document.getElementById('email').textContent;
+  const telefone = document.getElementById('tel').textContent;
+  const valorDataElement = document.getElementById('data');
+  const valorData = valorDataElement.textContent;
+  const inseredata = document.getElementById('escolha').value;
+  
+
+  if (valorData == 'SEM AGENDAMENTO' && inseredata == '') {
+    p.innerHTML = 'DIGITE UMA DATA VÁLIDA';
+  } else if (valorData != 'SEM AGENDAMENTO' && inseredata == '' || valorData != 'SEM AGENDAMENTO' && inseredata != '') {
+    p.innerHTML = 'VOCÊ JÁ TEM UM HORÁRIO AGENDADO!';
+  } else {
+    const url = `/areacliente/${email}/${nome}/${telefone}/${valorData}`;
+    const dado = {
+      data: inseredata
+    };
+
+    axios.post(url, dado)
+      .then(function resposta(response) {
+        const url = `/areacliente/${email}/${nome}/${telefone}/${inseredata}`;
+        window.location.href = url;
+      });
+  }
+}
+
+function mudarhorario() {
+  var p = document.getElementById('conf');
+  const nome = document.getElementById('nome').textContent;
+  const email = document.getElementById('email').textContent;
+  const telefone = document.getElementById('tel').textContent;
+  const valorDataElement = document.getElementById('data');
+  const valorData = valorDataElement.textContent;
+  const horarionovo = document.getElementById('novohorario').value;
+
+  if (valorData == 'SEM AGENDAMENTO' && horarionovo == '') {
+    p.innerHTML = 'VOCÊ NÃO TEM NENHUM AGENDAMENTO PARA MUDAR!';
+  } else if (valorData != 'SEM AGENDAMENTO' && horarionovo == '') {
+    p.innerHTML = 'DIGITE UMA DATA VÁLIDA';
+  } else {
+    const url = `/areacliente/${email}/${nome}/${telefone}/${valorData}`;
+    dado = {
+      hnovo: horarionovo,
+      hantigo: valorData
+    };
+    axios.put(url, dado).then(function retorno() {
+      const caminho = `/areacliente/${email}/${nome}/${telefone}/${horarionovo}`;
+      window.location.href = caminho;
+    });
+  }
+}
+
+function deletar(){
+    
+     var p = document.getElementById('conf');
+    const nome = document.getElementById('nome').textContent;
+    const email = document.getElementById('email').textContent;
+    const telefone = document.getElementById('tel').textContent;
+    const valorDataElement = document.getElementById('data');
+    const valorData = valorDataElement.textContent;
+    const horarionovo = document.getElementById('novohorario').value;
+
+    if(valorData =='SEM AGENDAMENTO'){
+        p.innerHTML = 'VOCÊ NÃO TEM AGENDAMENTOS PARA EXCLUIR'
+    }else{
+        dados = {
+        email:email
+    }
+    const valor = 'SEM AGENDAMENTO'
+        const url = `/areacliente/${email}/${nome}/${telefone}/${valorData}`;
+        axios.delete(url,dados).then(function resp(){
+            const caminho = `/areacliente/${email}/${nome}/${telefone}/${valor}`;
+      window.location.href = caminho;
+
+        })
+    }
+    
+    
+
+}
+    
+</script>
+
+
+</html>

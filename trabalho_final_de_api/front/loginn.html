@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            background-color: #181920;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, helvetica, sans-serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .area-login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #181920;
+            border-radius: 10px;
+            width: 355px;
+            height: 320px;
+            padding: 35px;
+        }
+        
+        .login form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .login input {
+            margin-top: 10px;
+            background-color: #252a34;
+            padding: 10px;
+            color: #cbd0f7;
+            border: none;
+            height: 45px;
+            width: 100%; /* Adicionado */
+            outline: none;
+            border-radius: 8px;
+        }
+        
+        .login input::placeholder {
+            color: #cbd0f7;
+            font-size: 14px;
+        }
+        
+        .login .password-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        
+        .login .password-wrapper input[type="password"] {
+            flex-grow: 1;
+            padding-right: 30px;
+            box-sizing: border-box;
+        }
+        
+        .login .password-wrapper .toggle-password {
+            position: relative;
+            cursor: pointer;
+            font-size: 18px;
+            color: #cbd0f7;
+        }
+        
+        .login .password-wrapper .toggle-password i {
+            margin-left: 5px;
+        }
+        
+        .login img {
+            width: 80px;
+            height: auto;
+        }
+
+        
+        .botao {
+            display: block;
+            background-color: #5568fe;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            width: auto;
+        }
+        
+        p {
+            color: #cbd0f7;
+        }
+        
+        a {
+            color: #5568fe;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section class="area-login">
+        <div class="login">
+            <div>
+                <img>
+            </div>
+            <form>
+                <input type="email" name="email" required autofocus placeholder="EMAIL">
+                <div class="password-wrapper">
+                    <input type="password"   name="senha" placeholder="Senha">
+                    <span class="toggle-password" onclick="toggleSenhaVisibility()"><i class="fas fa-eye"></i></span>
+                </div>
+            </form>
+            <p id="meup"></p>
+            <button class ="botao" onclick="clicada()">enviar</button>
+            <p>Ainda não possui conta<a href="/cadastrar">criar conta</a></p>
+        </div>
+    </section>
+
+    <script>
+
+function toggleSenhaVisibility() {
+            var campoSenha = document.getElementById("senha");
+            var toggleIcon = document.querySelector(".toggle-password");
+            
+            if (campoSenha.type === "password") {
+                campoSenha.type = "text";
+                toggleIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                campoSenha.type = "password";
+                toggleIcon.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        }
+
+            function clicada(){
+                var nome = document.getElementsByName("email")[0].value;
+                var senha = document.getElementsByName("senha")[0].value;
+                dados = {
+                    ema:nome,
+                    sen:senha
+                }
+                axios.post('/verifica',dados).then(response =>{
+                    if(response.data == 'EMAIL ENVALIDO'){
+                        var p = document.getElementById("meup")
+                        p.innerHTML = response.data
+                    }else if(response.data =='SENHA NÃO CONFERE'){
+                        var p = document.getElementById("meup")
+                        p.innerHTML = response.data
+                    }else{
+                        var redirectURL = '/areacliente/' + encodeURIComponent(response.data.email) + '/' + encodeURIComponent(response.data.nome) + '/' + encodeURIComponent(response.data.telefone) + '/'+  encodeURIComponent(response.data.data);
+                        window.location.href = redirectURL;
+
+                    }
+                })
+            
+            }
+
+
+
+
+
+
+
+
+
+/*
+document.getElementById("myform").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+
+            // Recupera os valores do formulário
+            var nome = document.getElementsByName("email")[0].value;
+            var senha = document.getElementsByName("senha")[0].value;
+
+            
+        
+              
+            
+              var redirectURL = '/rota/' + encodeURIComponent(nome) + '/' + encodeURIComponent(senha);
+
+              // Redireciona o navegador para a nova URL
+              window.location.href = redirectURL;
+
+
+            // Cria a URL de redirecionamento
+            
+        });
+
+
+
+*/
+
+
+
+
+
+        
+    </script>
+</body>
+</html>

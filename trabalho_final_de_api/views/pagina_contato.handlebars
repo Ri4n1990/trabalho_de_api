@@ -1,0 +1,43 @@
+</head>
+	<body>
+		<header>
+			<div class="caixa">
+				<h1>ADALTOS BARBER</h1>
+
+				<nav>
+					<ul>
+						<li><a href="/">DESLOGAR</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<h2>SEUS AGENDAMENTOS</h2>
+
+		<table>
+			<thead>
+				<tr>
+					<th>nome</th>
+					<th>email</th>
+					<th>telefone</th>
+					<th>dia e hora agendados</th>
+					<th>CANCELAR AGENDAMENTO</th>
+					<th>MUDAR DIA E HORA</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<td id="nome">{{nome}}</td>
+				<td id="email">{{email}}</td>
+				<td id="tel">{{telefone}}</td>
+				<td id="data">{{data}}</td>
+				<td><button onclick="deletar()">CANCELAR</button></td>
+				<td><input type="datetime-local" id="novohorario"><button onclick="mudarhorario()">MUDAR</button></td>
+			</tbody>
+		</table>
+		<p id="conf"></p>
+		<h2 class="ajeita">AGENDAR UM HORÁRIO</h2>
+		<form action="">
+			<input type="datetime-local" id="escolha">
+		</form>
+		<button onclick="agendar()">AGENDAR HORARIO</button>
+	</body>
