@@ -81,16 +81,26 @@ app.get('/areacliente/:email/:nome/:telefone/:data', (req, res) => {
 });
 
 app.post('/areacliente/:email/:nome/:telefone/:data',(req,res)=>{
-    db.inserir({data:req.body.data}).then(()=>{
-        db.consultar({data:req.body.data}).then(response =>{
-            db.agendar({id:response[0].id,email:req.params.email}).then(()=>{
-                res.send('AGENDADO COM SUCESSO')
-            })
-        }) 
+    console.log(req.body.data)
+    db.verificadata({data:req.body.data}).then((response)=>{
+        if(response.length == 1){
+            res.send('O HORÁRIO JÁ ESTA OCUPADO')
+        }else{
+            db.inserir({data:req.body.data}).then(()=>{
+                db.consultar({data:req.body.data}).then(response =>{
+                    db.agendar({id:response[0].id,email:req.params.email}).then(()=>{
+                        res.send('AGENDADO COM SUCESSO')
+                })
+            }) 
+    
+        }).catch((err)=>{
+            console.log(err)
+            
+        })
 
-    }).catch(()=>{
-        res.send('ALGUM CLIENTE JÁ AGENDOU ESSA DATA')
+        }
     })
+      
 
 })
 
@@ -110,14 +120,39 @@ app.delete('/areacliente/:email/:nome/:telefone/:data',(req,res)=>{
 })
 
 app.get('/cadastrar',(req,res)=>{
-    res.render('cadastro')
+    res.render('cadastro',{
+        style:'cad.css',
+        layout:'cadastro'
+    })
 })
 
 app.post('/cadastrar',(req,res)=>{
+    db.verificaremail({email:req.body.email}).then(response =>{
+        if(response.length == 0){
+            db.inserircliente({nome:req.body.nome,email:req.body.email,telefone:req.body.telefone,senha:req.body.senha}).then(()=>{
+                res.send('CONCLUIDO')
+            })
+
+        }else{
+            res.send('O EMAIL JÁ ESTA CADASTRADO!')
+
+        }
+    })
+    /*
     db.inserircliente({nome:req.body.nome,email:req.body.email,telefone:req.body.telefone,senha:req.body.senha}).then(()=>{
         res.redirect('/')
     }).catch(err =>{
         console.log(err)
+    })
+    */
+
+})
+
+
+
+app.get('/sobrenos',(req,res)=>{
+    res.render('precos',{
+        style:'precos.css'
     })
 })
 app.listen(3000,()=>{

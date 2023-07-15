@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/{{style}}">
+    <title>cadastro</title>
+</head>
+<body>
+{{{body}}}
+
+<script>
+    function cadastrar() {
+  var nome = document.getElementsByName('nome')[0].value;
+  var email = document.getElementsByName('email')[0].value;
+  var telefone = document.getElementsByName('telefone')[0].value;
+  var senha = document.getElementsByName('senha')[0].value;
+
+  if (nome === '' || email === '' || telefone === '' || senha === '') {
+    console.log('é isso ai');
+    const aviso = document.getElementById('aviso');
+    aviso.innerHTML = 'PREENCHA TODOS OS CAMPOS!';
+  }else if (email.indexOf('@gmail.com') === -1) {
+    console.log(email.length);
+    const aviso = document.getElementById('aviso');
+    aviso.innerHTML = 'O campo email deve conter os caracteres @gmail.com!';
+  }else if (email.indexOf('@gmail.com') !== -1 && email.length <= 10) {
+    const aviso = document.getElementById('aviso');
+    aviso.innerHTML = 'DIGITE UM EMAIL VÁLIDO';
+  // Ou faça alguma outra ação aqui
+}else if(telefone.length < 9){
+  const aviso = document.getElementById('aviso');
+  aviso.innerHTML = 'O TELEFONE DEVE TER NO MINIMO 9 CARACTERES!';
+}else{
+    dados = {
+        nome:nome,
+        email:email,
+        telefone:telefone,
+        senha:senha
+    }
+    axios.post('/cadastrar',dados).then(response =>{
+        if(response.data =='O EMAIL JÁ ESTA CADASTRADO!'){
+            const aviso = document.getElementById('aviso');
+            aviso.innerHTML = 'O EMAIL INFORMADO JÁ ESTA CADASTRADO!';
+
+        }else{
+             var redirectURL = '/'
+             window.location.href = redirectURL; 
+        }
+        
+        
+    })
+}
+
+
+}
+
+
+
+</script>
+</body>
+</html>

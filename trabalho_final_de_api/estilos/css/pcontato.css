@@ -1,8 +1,18 @@
 header {
-	background: #BBBBBB;
+	background: #252a34;
 	padding: 20px 0;
 }
 
+body {
+	margin: 0;
+	padding: 0;
+  }
+
+
+.move{
+	margin-left: 460px;
+	margin-top: 100px;
+}
 .caixa {
 	position: relative;
 	width: 940px;
@@ -109,9 +119,7 @@ form label, form legend {
 	width: 50%;
 }
 
-.checkbox {
-	margin: 20px 0;
-}
+
 
 .enviar {
 	width:40%;
@@ -148,11 +156,87 @@ td, th {
 
 h1{
 	text-align: center;
+	font-family: 'Lobster Two', cursive;
+	color: #FFFFFF;
+	font-size: 40px;
 }
 h2{
-	margin-left: 300px;
+	text-align: center;
+	font-size: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-top: 50px;
+
 }
 
 .ajeita{
 	margin-left: 0px;
+}
+
+a{
+	text-decoration: none;
+	color: white;
+
+}
+ul{
+	list-style-type: none;
+	margin-left: 800px;
+	width: 400px;
+	margin-bottom: 0px;
+	
+}
+
+li{
+	display: inline;
+	padding: 10px;
+	font-size: 20px;
+}
+.cancela{
+	width: 20px;
+}
+
+button{
+	margin-left: 20px;
+}
+
+p{
+	text-align: center;
+	font-size: 20px;
+
+	
+}
+
+.agendar{
+	margin-left: 42%;
+	background-color: #252a34;
+	width: 300px;
+	height: 200px;
+	border-radius: 20px;
+	
+
+}
+
+
+.agenda{
+	margin-top: 50px;
+	margin-left: 30px;
+	display: block;
+    background-color: #5568fe;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    width: 250px;
+}
+
+.dt{
+	margin-top: 50px;
+	margin-left:70px;
+}
+
+.sobrenos{
+	text-decoration: none;
+	color: #FFFFFF;
+	font-size: 20px;
+	margin-left: 200px;
+
 }

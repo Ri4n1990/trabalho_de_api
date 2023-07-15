@@ -3,16 +3,17 @@
 		<header>
 			<div class="caixa">
 				<h1>ADALTOS BARBER</h1>
-
-				<nav>
-					<ul>
-						<li><a href="/">DESLOGAR</a></li>
-					</ul>
-				</nav>
+				<ul>
+					<li><a href="/">DESLOGAR</a></li>
+					<li><a href="">PREÇOS</a></li>
+				</ul>
+				
+				
 			</div>
 		</header>
-		<h2>SEUS AGENDAMENTOS</h2>
+		<h2>SEU CADASTRO</h2>
 
+		<div class="move">
 		<table>
 			<thead>
 				<tr>
@@ -30,14 +31,20 @@
 				<td id="email">{{email}}</td>
 				<td id="tel">{{telefone}}</td>
 				<td id="data">{{data}}</td>
-				<td><button onclick="deletar()">CANCELAR</button></td>
+				<td class="cancela"><button onclick="deletar()">CANCELAR</button></td>
 				<td><input type="datetime-local" id="novohorario"><button onclick="mudarhorario()">MUDAR</button></td>
 			</tbody>
 		</table>
+		</div>
 		<p id="conf"></p>
 		<h2 class="ajeita">AGENDAR UM HORÁRIO</h2>
+		<div class="agendar"> 
 		<form action="">
-			<input type="datetime-local" id="escolha">
+			<input class="dt" type="datetime-local" id="escolha">
 		</form>
-		<button onclick="agendar()">AGENDAR HORARIO</button>
+		<button class="agenda" onclick="agendar()">AGENDAR HORARIO</button>
+		</div>
+
+
+		
 	</body>

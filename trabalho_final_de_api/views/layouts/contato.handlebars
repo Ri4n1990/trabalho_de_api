@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/{{style}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Área do cliente</title>
 </head>
@@ -31,14 +35,21 @@
     const dado = {
       data: inseredata
     };
-
     axios.post(url, dado)
       .then(function resposta(response) {
-        const url = `/areacliente/${email}/${nome}/${telefone}/${inseredata}`;
+        console.log(response.data)
+        if(response.data == 'O HORÁRIO JÁ ESTA OCUPADO'){
+          p.innerHTML = response.data
+        }else{
+           const url = `/areacliente/${email}/${nome}/${telefone}/${inseredata}`;
         window.location.href = url;
-      });
+         } 
+        });
   }
-}
+
+    
+   }
+          
 
 function mudarhorario() {
   var p = document.getElementById('conf');
@@ -59,7 +70,10 @@ function mudarhorario() {
       hnovo: horarionovo,
       hantigo: valorData
     };
-    axios.put(url, dado).then(function retorno() {
+    axios.put(url, dado).then(function retorno(response) {
+      if(response.data == 'O HORÁRIO JÁ ESTA OCUPADO'){
+        p.innerHTML = response.data
+      }
       const caminho = `/areacliente/${email}/${nome}/${telefone}/${horarionovo}`;
       window.location.href = caminho;
     });
@@ -93,6 +107,11 @@ function deletar(){
     
     
 
+}
+
+
+function precos(){
+  
 }
     
 </script>

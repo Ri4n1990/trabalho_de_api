@@ -22,7 +22,7 @@ const consulta = async(cliente)=>{
 
     const con = await conectar()
     const valores = [cliente.email]
-    const [linhas] = await con.query('SELECT c.nome, c.email, c.senha, c.telefone, COALESCE(DATE_FORMAT(a.data, "%Y-%m-%d %H:%i:%s"), "SEM AGENDAMENTO") AS data FROM clientes c LEFT JOIN agendamentos a ON a.id = c.codagendamento WHERE c.email = ?', valores);
+    const [linhas] = await con.query('SELECT c.nome, c.email, c.senha, c.telefone, COALESCE(DATE_FORMAT(a.data, "%d-%m-%Y %H:%i:%s"), "SEM AGENDAMENTO") AS data FROM clientes c LEFT JOIN agendamentos a ON a.id = c.codagendamento WHERE c.email = ?', valores);
     return await linhas
 
 }
@@ -72,6 +72,22 @@ const inserircliente = async(cliente)=>{
     con.query('INSERT INTO clientes(nome,email,telefone,senha) VALUES (?,?,?,?)',valores)
 
 }
+
+const verificaremail = async(cliente)=>{
+    const con = await conectar()
+    const valores = [cliente.email]
+    const [linhas] = await con.query('SELECT email FROM clientes WHERE email = ?',valores)
+    return await linhas
+
+}
+
+const verificadata = async(cliente)=>{
+    const con = await conectar()
+    const valores = [cliente.data]
+    const [linhas] = await con.query('SELECT data FROM agendamentos WHERE data = ?',valores)
+    return await linhas
+
+}
 module.exports = {
-    consulta,inserir,consultar,agendar,atualizar,excluicod,excluiagendamento,inserircliente
+    consulta,inserir,consultar,agendar,atualizar,excluicod,excluiagendamento,inserircliente,verificaremail,verificadata
 }
