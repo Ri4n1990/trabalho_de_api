@@ -60,7 +60,7 @@ function mudarhorario() {
   const valorData = valorDataElement.textContent;
   const horarionovo = document.getElementById('novohorario').value;
 
-  if (valorData == 'SEM AGENDAMENTO' && horarionovo == '') {
+  if (valorData == 'SEM AGENDAMENTO' && horarionovo == '' || valorData == 'SEM AGENDAMENTO' && horarionovo != '') {
     p.innerHTML = 'VOCÊ NÃO TEM NENHUM AGENDAMENTO PARA MUDAR!';
   } else if (valorData != 'SEM AGENDAMENTO' && horarionovo == '') {
     p.innerHTML = 'DIGITE UMA DATA VÁLIDA';

@@ -158,7 +158,7 @@ h1{
 	text-align: center;
 	font-family: 'Lobster Two', cursive;
 	color: #FFFFFF;
-	font-size: 40px;
+	font-size: 60px;
 }
 h2{
 	text-align: center;
@@ -233,10 +233,74 @@ p{
 	margin-left:70px;
 }
 
-.sobrenos{
-	text-decoration: none;
-	color: #FFFFFF;
-	font-size: 20px;
-	margin-left: 200px;
+
+
+.cabelo{
+	background-color: #252a34;
+	width: 500px;
+	height: 300px;
+	float: left;
+	margin-left: 100px;
+	border-radius: 20px;
 
 }
+.barba{
+	background-color: #252a34;
+	width: 500px;
+	height: 300px;
+	float: right;
+	margin-right: 100px;
+	border-radius: 20px;
+	
+}
+
+
+.cabeloebarba{
+	background-color: #252a34;
+	width: 500px;
+	height: 300px;
+	float: left;
+	margin-left: 100px;
+	border-radius: 20px;
+	
+}
+
+
+#precos{
+
+	margin-top: 100px;
+	overflow: hidden;
+	margin-bottom: 30px;
+	
+
+}
+
+.titulo{
+	margin-top: 100px;
+	font-size: 40px;
+}
+
+.precocabelo{
+	color: #FFFFFF;
+	font-size: 40px;
+	font-family: 'Lobster Two', cursive;
+}
+
+.precobarba{
+	color: #FFFFFF;
+	font-size: 40px;
+	font-family: 'Lobster Two', cursive;
+}
+
+.precocabelobarba{
+	color: #FFFFFF;
+	font-size: 40px;
+	font-family: 'Lobster Two', cursive;
+}
+
+.money{
+	color: #FFFFFF;
+	font-size: 80px;
+	margin-top: 0px;
+}
+
